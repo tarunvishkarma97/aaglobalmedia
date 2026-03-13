@@ -1,63 +1,102 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>AA Global Media</title>
-<<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-33KZ0Y7TGC"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-33KZ0Y7TGC');/script>
+<title>AA GLOBAL Media</title>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-initial-scale=1.0">
+
 <style>
+
 body{
 font-family: Arial;
 background:#111;
 color:white;
+margin:0;
+}
+
+header{
+background:#00c3ff;
+padding:20px;
 text-align:center;
+font-size:28px;
+font-weight:bold;
+color:black;
 }
-h1{
-color:#00fcc;
+
+.news-container{
+padding:20px;
 }
+
 .news{
-background:#222;
-margin:20px;
+background:#1e1e1e;
+margin-bottom:20px;
 padding:15px;
 border-radius:10px;
 }
-a{
-color:#00ffcc;
+
+.news img{
+width:100%;
+border-radius:10px;
+}
+
+.news h3{
+color:#00c3ff;
+}
+
+.news a{
+color:#00c3ff;
 text-decoration:none;
 }
+
 </style>
+
 </head>
+
 <body>
 
-<h1>AA Global Media</h1>
-<p>Automatic News Website</p>
+<header>
+AA GLOBAL Media
+</header>
 
-<div id="news"></div>
+<div class="news-container" id="news"></div>
 
 <script>
-let apiKey = "6e3605174f7a4ffda640395653e501a9";let url = "https://newsapi.org/v2/top-headlines?country=in&apiKey=" + apiKey;
+
+let apiKey = "6e3605174f7a4ffda640395653e501a9";
+
+let url =
+"https://newsapi.org/v2/top-headlines?country=in&pageSize=10&apiKey=" + apiKey;
 
 fetch(url)
-.then(res=>res.json())
-.then(data=>{
-let newsHTML="";
-data.articles.forEach(article=>{
-newsHTML+=`
+.then(res => res.json())
+.then(data => {
+
+let newsHTML = "";
+
+data.articles.forEach(article => {
+
+newsHTML += `
+
 <div class="news">
+
+<img src="${article.urlToImage}" />
+
 <h3>${article.title}</h3>
+
 <p>${article.description}</p>
-<a href="${article.url}" target="_blank"Read more</a>
+
+<a href="${article.url}" target="_blank">Read Full News</a>
+
 </div>
+
 `;
+
 });
-document.getElementById("news").innerHTML=newsHTML;
+
+document.getElementById("news").innerHTML = newsHTML;
+
 });
+
 </script>
 
 </body>
