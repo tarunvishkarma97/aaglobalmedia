@@ -2,11 +2,9 @@
 <html>
 <head>
 <title>AA GLOBAL Media</title>
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-
 body{
 font-family: Arial;
 background:#111;
@@ -47,28 +45,22 @@ color:#00c3ff;
 color:#00c3ff;
 text-decoration:none;
 }
-
 </style>
 
 </head>
 
 <body>
 
-<header>
-AA GLOBAL Media
-</header>
+<header>AA GLOBAL Media</header>
 
 <div class="news-container" id="news"></div>
 
 <script>
 
-let apiKey = "6e3605174f7a4ffda640395653e501a9";
-
-let url =
-"https://newsapi.org/v2/top-headlines?country=in&pageSize=10&apiKey=" + apiKey;
+let url = "https://gnews.io/api/v4/top-headlines?lang=en&country=in&max=10&apikey=9f5f9a5f8c4b4b1a9c8e1b2f3a4b5c6d";
 
 fetch(url)
-.then(res => res.json())
+.then(response => response.json())
 .then(data => {
 
 let newsHTML = "";
@@ -76,19 +68,12 @@ let newsHTML = "";
 data.articles.forEach(article => {
 
 newsHTML += `
-
 <div class="news">
-
-<img src="${article.urlToImage}" />
-
+<img src="${article.image}">
 <h3>${article.title}</h3>
-
 <p>${article.description}</p>
-
 <a href="${article.url}" target="_blank">Read Full News</a>
-
 </div>
-
 `;
 
 });
