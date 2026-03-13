@@ -6,17 +6,17 @@
 
 <style>
 body{
-font-family: Arial;
-background:#111;
+font-family:Arial;
+background:black;
 color:white;
 margin:0;
 }
 
 header{
-background:#00c3ff;
+background:#00bcd4;
 padding:20px;
 text-align:center;
-font-size:28px;
+font-size:30px;
 font-weight:bold;
 color:black;
 }
@@ -29,62 +29,35 @@ border-radius:10px;
 }
 
 .news h3{
-color:#00c3ff;
+color:#00bcd4;
 }
 
-a{
-color:#00c3ff;
-text-decoration:none;
-}
 </style>
-
 </head>
 
 <body>
 
 <header>AA GLOBAL Media</header>
 
-<div id="news"></div>
-
-<script>
-
-let url =
-"https://api.allorigins.win/get?url=" +
-encodeURIComponent("https://news.google.com/rss?hl=en-IN&gl=IN&ceid=IN:en");
-
-fetch(url)
-.then(res => res.json())
-.then(data => {
-
-let parser = new DOMParser();
-let xml = parser.parseFromString(data.contents,"text/xml");
-
-let items = xml.querySelectorAll("item");
-
-let html = "";
-
-items.forEach((el,i)=>{
-
-if(i<10){
-
-html += `
 <div class="news">
-<h3>${el.querySelector("title").textContent}</h3>
-<a href="${el.querySelector("link").textContent}" target="_blank">
-Read Full News
-</a>
+<h3>India News</h3>
+<p>India economy is growing rapidly according to latest reports.</p>
 </div>
-`;
 
-}
+<div class="news">
+<h3>World News</h3>
+<p>Several global leaders met today to discuss climate change.</p>
+</div>
 
-});
+<div class="news">
+<h3>Technology News</h3>
+<p>Artificial Intelligence is transforming industries worldwide.</p>
+</div>
 
-document.getElementById("news").innerHTML = html;
-
-});
-
-</script>
+<div class="news">
+<h3>Sports News</h3>
+<p>India wins an important cricket match today.</p>
+</div>
 
 </body>
 </html>
