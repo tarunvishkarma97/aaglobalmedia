@@ -48,23 +48,35 @@ text-decoration:none;
 
 <script>
 
-let url = "https://api.rss2json.com/v1/api.json?rss_url=https://news.google.com/rss?hl=en-IN&gl=IN&ceid=IN:en";
+let url =
+"https://api.allorigins.win/get?url=" +
+encodeURIComponent("https://news.google.com/rss?hl=en-IN&gl=IN&ceid=IN:en");
 
 fetch(url)
 .then(res => res.json())
 .then(data => {
 
+let parser = new DOMParser();
+let xml = parser.parseFromString(data.contents,"text/xml");
+
+let items = xml.querySelectorAll("item");
+
 let html = "";
 
-data.items.slice(0,10).forEach(news => {
+items.forEach((el,i)=>{
+
+if(i<10){
 
 html += `
 <div class="news">
-<h3>${news.title}</h3>
-<p>${news.pubDate}</p>
-<a href="${news.link}" target="_blank">Read Full News</a>
+<h3>${el.querySelector("title").textContent}</h3>
+<a href="${el.querySelector("link").textContent}" target="_blank">
+Read Full News
+</a>
 </div>
 `;
+
+}
 
 });
 
