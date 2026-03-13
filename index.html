@@ -2,45 +2,61 @@
 <html>
 <head>
 <title>AA GLOBAL Media</title>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+
 body{
 font-family:Arial;
-background:#000;
+background:#121212;
 color:white;
 margin:0;
 }
 
 header{
 background:#00bcd4;
-padding:20px;
+padding:18px;
 text-align:center;
-font-size:30px;
+font-size:28px;
 font-weight:bold;
 color:black;
 }
 
-.news{
+.container{
+padding:10px;
+}
+
+.card{
+display:flex;
 background:#1e1e1e;
-margin:20px;
-padding:15px;
+margin:12px 0;
 border-radius:10px;
+overflow:hidden;
 }
 
-.news h3{
+.card img{
+width:120px;
+height:100px;
+object-fit:cover;
+}
+
+.card-content{
+padding:10px;
+flex:1;
+}
+
+.card-content h3{
+font-size:16px;
+margin:0;
+}
+
+.source{
+font-size:12px;
 color:#00bcd4;
+margin-top:6px;
 }
 
-.news img{
-width:100%;
-border-radius:10px;
-}
-
-a{
-color:#00bcd4;
-text-decoration:none;
-}
 </style>
 
 </head>
@@ -49,30 +65,41 @@ text-decoration:none;
 
 <header>AA GLOBAL Media</header>
 
-<div id="news"></div>
+<div class="container" id="news"></div>
 
 <script>
 
-fetch("https://api.rss2json.com/v1/api.json?rss_url=https://news.google.com/rss?hl=en-IN&gl=IN&ceid=IN:en")
+fetch("https://api.rss2json.com/v1/api.json?rss_url=https://news.google.com/rss")
 .then(res=>res.json())
 .then(data=>{
 
-let newsHTML="";
+let html="";
 
 data.items.slice(0,10).forEach(article=>{
 
-newsHTML += `
-<div class="news">
+html+=`
+
+<div class="card">
+
 <img src="${article.thumbnail}">
+
+<div class="card-content">
+
 <h3>${article.title}</h3>
-<p>${article.pubDate}</p>
-<a href="${article.link}" target="_blank">Read Full News</a>
+
+<div class="source">
+${article.author} • ${article.pubDate}
 </div>
+
+</div>
+
+</div>
+
 `;
 
 });
 
-document.getElementById("news").innerHTML=newsHTML;
+document.getElementById("news").innerHTML=html;
 
 });
 
