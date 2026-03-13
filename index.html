@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AA Global Media</title>
+<meta name="viewport" content="width=device-width,
+initial-scale=1.0">
+<style>
+body{
+font-family: Arial;
+background:#111;
+color:white;
+text-align:center;
+}
+h1{
+color:#00fcc;
+}
+.news{
+background:#222;
+margin:20px;
+padding:15px;
+border-radius:10px;
+}
+a{
+color:#00ffcc;
+text-decoration:none;
+}
+</style>
+</head>
+<body>
+
+<h1>AA Global Media</h1>
+<p>Automatic News Website</p>
+
+<div id="news"></div>
+
+<script>
+let apiKey = "6e3605174f7a4ffda640395653e501a9";
+let url =
+"https://newsapi.org/v2/top-headlines?country=in&apiKey="+apiKey
+:
+
+fetch(url)
+.then(res=>res.json())
+.then(data=>{
+let newsHTML="";
+data.articles.forEach(article=>{
+newsHTML+=`
+<div class="news">
+<h3>${article.title}</h3>
+<p>${article.description}</p>
+<a href="${article.url}" target="_blank"Read more</a>
+</div>
+`;
+});
+document.getElementById("news").innerHTML=newsHTML;
+});
+</script>
+
+</body>
+</html>
