@@ -21,19 +21,10 @@ font-weight:bold;
 color:black;
 }
 
-.news-container{
-padding:20px;
-}
-
 .news{
 background:#1e1e1e;
-margin-bottom:20px;
+margin:20px;
 padding:15px;
-border-radius:10px;
-}
-
-.news img{
-width:100%;
 border-radius:10px;
 }
 
@@ -41,7 +32,7 @@ border-radius:10px;
 color:#00c3ff;
 }
 
-.news a{
+a{
 color:#00c3ff;
 text-decoration:none;
 }
@@ -53,32 +44,31 @@ text-decoration:none;
 
 <header>AA GLOBAL Media</header>
 
-<div class="news-container" id="news"></div>
+<div id="news"></div>
 
 <script>
 
-let url = "https://gnews.io/api/v4/top-headlines?lang=en&country=in&max=10&apikey=9f5f9a5f8c4b4b1a9c8e1b2f3a4b5c6d";
+let url = "https://api.rss2json.com/v1/api.json?rss_url=https://news.google.com/rss?hl=en-IN&gl=IN&ceid=IN:en";
 
 fetch(url)
-.then(response => response.json())
+.then(res => res.json())
 .then(data => {
 
-let newsHTML = "";
+let html = "";
 
-data.articles.forEach(article => {
+data.items.slice(0,10).forEach(news => {
 
-newsHTML += `
+html += `
 <div class="news">
-<img src="${article.image}">
-<h3>${article.title}</h3>
-<p>${article.description}</p>
-<a href="${article.url}" target="_blank">Read Full News</a>
+<h3>${news.title}</h3>
+<p>${news.pubDate}</p>
+<a href="${news.link}" target="_blank">Read Full News</a>
 </div>
 `;
 
 });
 
-document.getElementById("news").innerHTML = newsHTML;
+document.getElementById("news").innerHTML = html;
 
 });
 
